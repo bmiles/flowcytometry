@@ -1,0 +1,182 @@
+{
+  "protocols": [
+    {
+      "name": "FlowCytometry",
+      "version": "1.0.0",
+      "categories": ["Protocols"],
+      "description": "Assess the fluorescent properties of a cell population using an Attune® NxT Acoustic Focusing Cytometer.",
+      "command_string": "python flow_cytometry.py",
+      "inputs": {
+        "samples": {
+          "type" : "group",
+          "label": "Samples",
+          "inputs" : {
+            "well" : "aliquot+",
+            "vol" : {
+              "type": "volume",
+              "label": "Volume"
+            },
+            "events" : {
+              "type" : "integer",
+              "label": "Events (opt)",
+              "description": "Number of events to record. Optional, if not set the entire indicated volume of will be analyzed.",
+              "required": false
+            }
+          }
+        },
+        "fsc": {
+          "type": "group",
+          "label": "FSC",
+          "inputs": {
+            "area" : "bool",
+            "height" : "bool",
+            "weight" : "bool"
+          }
+        },
+        "ssc": {
+          "type": "group",
+          "label": "SSC",
+          "inputs": {
+            "area" : "bool",
+            "height" : "bool",
+            "weight" : "bool"
+          }
+        },
+        "colorx" : {
+          "type" : "group",
+          "label": "Color",
+          "inputs": {
+            "FitC" : "bool",
+            "TxR" : "bool",
+            "RFP" : "bool",
+            "EYFP" : "bool",
+            "Pacific Blue" : "bool",
+            "Pacific Green" : "bool",
+            "Pacific Orange" : "bool",
+            "Qdot 705" : "bool",
+            "PerCP-Cy55" : "bool",
+            "PeCy55" : "bool",
+            "PeCy7" : "bool",
+            "APC" : "bool",
+            "AlexaFluor750" : "bool",
+            "AlexaFluor700" : "bool"
+          }
+        },
+        "color" : {
+          "type" : "string",
+          "label": "Color"
+        },
+        "pc_samples" : {
+          "type" : "group+",
+          "label": "Positive control samples",
+          "inputs" : {
+            "well" : "aliquot",
+            "vol" : {
+              "type": "volume",
+              "label": "Volume"
+            },
+            "events" : {
+              "type" : "integer",
+              "label": "Events (opt)",
+              "description": "Number of events to record. Optional, if not set the entire indicated volume of will be analyzed.",
+              "required": false
+            },
+            "channel" : {
+              "type" : "string",
+              "description": "Must match FSC,SCC or any of the colors you selected."
+            },
+            "bleed" : {
+              "type" : "group+",
+              "label": "Bleed",
+              "inputs" : {
+                "from" : {
+                  "type" : "string",
+                  "label": "From Channel",
+                  "description": "Channel name"
+                },
+                "to" : {
+                  "type" : "string",
+                  "label": "To Channel",
+                  "description": "Channel name"
+                }
+              }
+            }
+          }
+        },
+        "nc_samples" : {
+          "type" : "group+",
+          "label": "Negative control samples",
+          "inputs" : {
+            "well" : "aliquot",
+            "vol" : {
+              "type": "volume",
+              "label": "Volume"
+            },
+            "events" : {
+              "type" : "integer",
+              "label": "Events (opt)",
+              "description": "Number of events to record. Optional, if not set the entire indicated volume of will be analyzed.",
+              "required": false
+            },
+            "channel" : {
+              "type" : "string",
+              "description": "Must match FSC,SCC or any of the colors you selected."
+            }
+          }
+        }
+      },
+      "preview": {
+        "refs": {
+          "src_plate": {
+            "type": "96-flat",
+            "aliquots": {
+              "0": {"volume": "100:microliter"},
+              "1": {"volume": "100:microliter"},
+              "2": {"volume": "100:microliter"},
+              "3": {"volume": "100:microliter"},
+              "4": {"volume": "100:microliter"},
+              "5": {"volume": "100:microliter"},
+              "6": {"volume": "100:microliter"},
+              "7": {"volume": "100:microliter"}
+            },
+            "discard":true
+          }
+        },
+        "parameters": {
+          "fsc":{
+            "area": true,
+            "height": true,
+            "weight": true
+          },
+          "ssc":{
+            "area": true,
+            "height": false,
+            "weight": false
+          },
+          "color": "FitC, TxR",
+          "pc_samples" : [{
+            "well" : "src_plate/1",
+            "vol" : "50:microliter",
+            "channel" : "FitC",
+            "bleed" : [{
+              "from" : "FitC",
+              "to" : "TxR"
+            }]
+          }],
+          "nc_samples" : [{
+            "well" : "src_plate/1",
+            "vol" : "50:microliter",
+            "channel" : "FSC,SSC,FitC,TxR"
+          }],
+          "samples" : {
+            "well" : ["src_plate/2","src_plate/3","src_plate/4","src_plate/5","src_plate/6","src_plate/7"],
+            "vol" : "50:microliter"
+          }
+        }
+      },
+      "dependencies": []
+    }
+  ],
+  "license": "MIT",
+  "format": "python"
+}

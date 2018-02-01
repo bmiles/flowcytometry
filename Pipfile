@@ -1,0 +1,17 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+autoprotocol = "*"
+autoprotocol-utilities = "<3.0,>=2.1.7"
+promodules = "<3.0,>=2.5.1"
+transcriptic = "*"
+
+
+[dev-packages]
+
