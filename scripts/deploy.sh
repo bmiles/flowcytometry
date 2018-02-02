@@ -1,5 +1,6 @@
 set -x
 source ~/virtualenv/python2.7/bin/activate
+pip install transcriptic
 echo "hi I am the start $PWD"
 env | sort
 cp scripts/.transcriptic ~/.transcriptic
