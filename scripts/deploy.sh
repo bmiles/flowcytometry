@@ -10,9 +10,9 @@ sed -i "s/\$ORGANIZATION_ID/$organization_id/g" ~/.transcriptic
 cat ~/.transcriptic
 sed -i "s/\$USER_ID/$user_id/g" ~/.transcriptic
 cat ~/.transcriptic
-sed -i "s/\$FEATURE1/$feature_1/g" ~/.transcriptic
+sed -i "s/\$FEATURE1/$feature1/g" ~/.transcriptic
 cat ~/.transcriptic
-sed -i "s/\$FEATURE2/$feature_2/g" ~/.transcriptic
+sed -i "s/\$FEATURE2/$feature2/g" ~/.transcriptic
 cat ~/.transcriptic
 transcriptic packages
 transcriptic build-release
