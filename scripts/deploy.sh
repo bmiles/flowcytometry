@@ -1,5 +1,4 @@
 set -x
-source ~/virtualenv/python2.7/bin/activate
 pip install transcriptic
 cp scripts/.transcriptic ~/.transcriptic
 cat ~/.transcriptic
