@@ -1,9 +1,9 @@
 {
-  "email": $EMAIL,
-  "token": $TOKEN,
-  "organization_id": $ORGANIZATION_ID,
+  "email": "$EMAIL",
+  "token": "$TOKEN",
+  "organization_id": "$ORGANIZATION_ID",
   "api_root": "https://secure.transcriptic.com",
   "analytics": true,
-  "user_id": $USER_ID,
+  "user_id": "$USER_ID",
   "feature_groups": []
 }
