@@ -1,10 +1,11 @@
 set -x
 source ~/virtualenv/python2.7/bin/activate
 pip install transcriptic
-echo "hi I am the start $PWD"
-env | sort
 cp scripts/.transcriptic ~/.transcriptic
+cat ~/.transcriptic | sed "s/\$EMAIL/$email/g" > ~./transcriptic
+cat ~/.transcriptic | sed "s/\$TOKEN/$token/g" > ~./transcriptic
+cat ~/.transcriptic | sed "s/\$ORGANIZATION_ID/$organization_id/g" > ~./transcriptic
+cat ~/.transcriptic | sed "s/\$USER_ID/$user_id/g" > ~./transcriptic
 transcriptic packages
 transcriptic build-release
 transcriptic upload-release release.zip pk1b6etjw8x2ep
-echo "hi I'm the end"
