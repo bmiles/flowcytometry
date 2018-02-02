@@ -10,6 +10,10 @@ sed -i "s/\$ORGANIZATION_ID/$organization_id/g" ~/.transcriptic
 cat ~/.transcriptic
 sed -i "s/\$USER_ID/$user_id/g" ~/.transcriptic
 cat ~/.transcriptic
+sed -i "s/\$FEATURE1/$feature_1/g" ~/.transcriptic
+cat ~/.transcriptic
+sed -i "s/\$FEATURE2/$feature_2/g" ~/.transcriptic
+cat ~/.transcriptic
 transcriptic packages
 transcriptic build-release
 transcriptic upload-release release.zip pk1b6etjw8x2ep

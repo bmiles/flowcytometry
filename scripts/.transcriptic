@@ -5,5 +5,8 @@
   "api_root": "https://secure.transcriptic.com",
   "analytics": true,
   "user_id": "$USER_ID",
-  "feature_groups": []
+  "feature_groups": [
+    "$FEATURE1",
+    "$FEATURE2"
+  ]
 }
