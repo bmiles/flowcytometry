@@ -1,5 +1,5 @@
 set -x
-echo "hi I'm the start $PWD"
+echo "hi I am the start $PWD"
 env | sort
 cp scripts/.transcriptic ~/.transcriptic
 pipenv install
