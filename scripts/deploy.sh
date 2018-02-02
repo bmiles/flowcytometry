@@ -14,7 +14,7 @@ sed -i "s/\$FEATURE1/$feature1/g" ~/.transcriptic
 cat ~/.transcriptic
 sed -i "s/\$FEATURE2/$feature2/g" ~/.transcriptic
 cat ~/.transcriptic
-transcriptic runs
+transcriptic projects
 transcriptic packages
 transcriptic build-release
 transcriptic upload-release release.zip pk1b6etjw8x2ep
