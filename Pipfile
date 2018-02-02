@@ -11,6 +11,8 @@ autoprotocol = "*"
 autoprotocol-utilities = "<3.0,>=2.1.7"
 promodules = "<3.0,>=2.5.1"
 transcriptic = "*"
+tox = "*"
+pytest = "*"
 
 
 [dev-packages]
