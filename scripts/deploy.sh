@@ -2,7 +2,6 @@ set -x
 echo "hi I am the start $PWD"
 env | sort
 cp scripts/.transcriptic ~/.transcriptic
-pipenv install
 transcriptic packages
 transcriptic build-release
 transcriptic upload-release release.zip pk1b6etjw8x2ep
