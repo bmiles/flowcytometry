@@ -10,6 +10,7 @@ script:
 deploy:
   provider: script
   script:
+    - echo "hi I'm an extra line"
     - sh $TRAVIS_BUILD_DIR/scripts/deploy.sh
   on:
     branch: master
