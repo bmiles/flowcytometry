@@ -2,7 +2,7 @@
   "protocols": [
     {
       "name": "FlowCytometry",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "categories": ["Protocols"],
       "description": "Assess the fluorescent properties of a cell population using an Attune® NxT Acoustic Focusing Cytometer.",
       "command_string": "python flow_cytometry.py",

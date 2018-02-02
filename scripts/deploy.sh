@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+set -x
 echo "hi I'm the start $PWD"
 env | sort
 cp scripts/.transcriptic ~/.transcriptic
