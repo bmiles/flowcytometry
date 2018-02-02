@@ -9,6 +9,8 @@ script:
   - echo "no tests"
 deploy:
   provider: script
-  script: scripts/deploy.sh
+  script:
+    - echo "yoyoyo $PWD"
+    - sh scripts/deploy.sh
   on:
     branch: master
