@@ -13,4 +13,4 @@ transcriptic --config ~/.transcriptic packages
 transcriptic --config ~/.transcriptic build-release
 transcriptic --config ~/.transcriptic upload-release release.zip pk1b6etjw8x2ep > out
 cat out
-curl "https://secure.transcriptic.com/$organization_id/protocols/pr1b6hu37yypk8/publish" -X POST  -H 'Content-Type: application/json; charset=UTF-8' -H 'Accept: application/json' -H "X-User-Token: $token" -H 'X-User-Email: $email" 
+curl 'https://secure.transcriptic.com/$organization_id/protocols/pr1b6hu37yypk8/publish' -X POST  -H 'Content-Type: application/json; charset=UTF-8' -H 'Accept: application/json' -H 'X-User-Token: $token' -H 'X-User-Email: $email' 
