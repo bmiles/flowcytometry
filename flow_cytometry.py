@@ -1,6 +1,6 @@
 import datetime
 from autoprotocol.util import make_dottable_dict
-from modules.utils import make_list
+from autoprotocol_utilities.misc_helpers import make_list
 
 
 def make_samples(wells, volume):
