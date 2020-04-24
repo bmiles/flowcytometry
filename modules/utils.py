@@ -62,7 +62,7 @@ def thermocycle_ramp(start_temp, end_temp, total_duration, step_duration):
     start_temp = Unit.fromstring(start_temp).value
     num_steps = int(Unit.fromstring(total_duration).value // Unit.fromstring(step_duration).value)
     step_size = (Unit.fromstring(end_temp).value - start_temp) // num_steps
-    for i in xrange(0, num_steps):
+    for i in range(0, num_steps):
         thermocycle_steps.append({
             "temperature": "%d:celsius" % (start_temp + i * step_size), "duration": step_duration
             })
