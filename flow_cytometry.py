@@ -1,5 +1,5 @@
 import datetime
-from autoprotocol.util import make_dottable_dict
+# from autoprotocol.util import make_dottable_dict
 from autoprotocol_utilities.misc_helpers import make_list
 
 
@@ -14,39 +14,39 @@ def make_controls(controls):
     targets = []
 
     for control in controls:
-        control = make_dottable_dict(control)
-        control.channel = make_list(control.channel)
+        control = dict(control)
+        control["channel"] = make_list(control["channel"])
         if "bleed" in control:
-            bleed = [{"from": bl["from"], "to": make_list(bl["to"])} for bl in control.bleed]
-            if control.events:
+            bleed = [{"from": bl["from"], "to": make_list(bl["to"])} for bl in control["bleed"]]
+            if control["events"]:
                 targets.append({
-                    "well": control.well,
-                    "volume": control.vol,
-                    "events": control.events,
-                    "channel": control.channel,
+                    "well": control["well"],
+                    "volume": control["vol"],
+                    "events": control["events"],
+                    "channel": control["channel"],
                     "minimize_bleed": bleed
                 })
             else:
                 targets.append({
-                    "well": control.well,
-                    "volume": control.vol,
-                    "channel": control.channel,
+                    "well": control["well"],
+                    "volume": control["vol"],
+                    "channel": control["channel"],
                     "minimize_bleed": bleed
                 })
         else:
-            if control.events:
-                targets.append({"well": control.well, "volume": control.vol, "events": control.events,
-                                "channel": control.channel})
+            if control["events"]:
+                targets.append({"well": control["well"], "volume": control["vol"], "events": control["events"],
+                                "channel": control["channel"]})
             else:
-                targets.append({"well": control.well, "volume": control.vol, "channel": control.channel})
+                targets.append({"well": control["well"], "volume": control["vol"], "channel": control["channel"]})
 
     return targets
 
 
 def flow_cytometry(protocol, params):
-    params = make_dottable_dict(params)
-    params.samples = make_dottable_dict(params.samples)
-    params.color = make_list(params.color)
+    params = dict(params)
+    params["samples"] = dict(params["samples"])
+    params["color"] = make_list(params["color"])
 
     avail_colors = {
         "FitC": {"name": "FitC", "ex_wl": "488:nanometer", "em_wl": "530:nanometer"},
@@ -73,26 +73,26 @@ def flow_cytometry(protocol, params):
         "area": True,
         "height": False,
         "weight": False
-    } for selected in params.color]
+    } for selected in params["color"]]
 
     protocol.flow_analyze(
-        dataref=datetime.date.today().strftime('%d%b%Y') + "_flow_" + str(len(params.samples)) + "_samples",
+        dataref=datetime.date.today().strftime('%d%b%Y') + "_flow_" + str(len(params["samples"])) + "_samples",
         FSC={
             "voltage_range": {"low": "250:volt", "high": "450:volt"},
-            "area": params.fsc['area'],
-            "height": params.fsc['height'],
-            "weight": params.fsc['weight']
+            "area": params["fsc"]['area'],
+            "height": params["fsc"]['height'],
+            "weight": params["fsc"]['weight']
         },
         SSC={
             "voltage_range": {"low": "250:volt", "high": "400:volt"},
-            "area": params.ssc['area'],
-            "height": params.ssc['height'],
-            "weight": params.ssc['weight']
+            "area": params["ssc"]['area'],
+            "height": params["ssc"]['height'],
+            "weight": params["ssc"]['weight']
         },
         colors=colors,
-        neg_controls=make_controls(params.nc_samples),
-        pos_controls=make_controls(params.pc_samples),
-        samples=make_samples(params.samples.well, params.samples.vol)
+        neg_controls=make_controls(params["nc_samples"]),
+        pos_controls=make_controls(params["pc_samples"]),
+        samples=make_samples(params["samples"]["well"], params["samples"]["vol"])
     )
 
 if __name__ == '__main__':
