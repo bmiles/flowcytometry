@@ -6,7 +6,7 @@
       "categories": ["Protocols"],
       "image_url": "https://travis-ci.org/bmiles/flowcytometry.svg?branch=master",
       "description": "Assess the fluorescent properties of a cell population using an Attune® NxT Acoustic Focusing Cytometer.",
-      "command_string": "python flow_cytometry.py",
+      "command_string": "python3 -m flow_cytometry",
       "inputs": {
         "samples": {
           "type" : "group",
