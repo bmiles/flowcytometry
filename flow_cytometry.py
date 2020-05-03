@@ -1,46 +1,53 @@
 import datetime
 from autoprotocol_utilities.misc_helpers import make_list
+from autoprotocol.container import Well, WellGroup
 
 
 def make_samples(wells, volume):
-    return [{
-        "well": well,
-        "volume": volume
-    } for well in wells]
+    if isinstance(wells, (WellGroup, list)) and isinstance(wells[0], Well):
+        return [{
+            "well": well,
+            "volume": volume
+        } for well in wells]
+    else:
+        raise TypeError(f"{type(wells)}, should be of type WellGroup or list of well")
 
 
 def make_controls(controls):
-    targets = []
+    """Receives a WellGroup and assembles an list of dicts called targets."""
+    if isinstance(controls, (WellGroup, list)):
+        targets = []
 
-    for control in controls:
-        control = dict(control)
-        control["channel"] = make_list(control["channel"])
-        if "bleed" in control:
-            bleed = [{"from": bl["from"], "to": make_list(bl["to"])} for bl in control["bleed"]]
-            if control["events"]:
-                targets.append({
-                    "well": control["well"],
-                    "volume": control["vol"],
-                    "events": control["events"],
-                    "channel": control["channel"],
-                    "minimize_bleed": bleed
-                })
+        for control in controls:
+            control = dict(control)
+            control["channel"] = make_list(control["channel"])
+            if "bleed" in control:
+                bleed = [{"from": bl["from"], "to": make_list(bl["to"])} for bl in control["bleed"]]
+                if control["events"]:
+                    targets.append({
+                        "well": control["well"],
+                        "volume": control["vol"],
+                        "events": control["events"],
+                        "channel": control["channel"],
+                        "minimize_bleed": bleed
+                    })
+                else:
+                    targets.append({
+                        "well": control["well"],
+                        "volume": control["vol"],
+                        "channel": control["channel"],
+                        "minimize_bleed": bleed
+                    })
             else:
-                targets.append({
-                    "well": control["well"],
-                    "volume": control["vol"],
-                    "channel": control["channel"],
-                    "minimize_bleed": bleed
-                })
-        else:
-            if control["events"]:
-                targets.append({"well": control["well"], "volume": control["vol"], "events": control["events"],
-                                "channel": control["channel"]})
-            else:
-                targets.append({"well": control["well"], "volume": control["vol"], "channel": control["channel"]})
+                if control["events"]:
+                    targets.append({"well": control["well"], "volume": control["vol"], "events": control["events"],
+                                    "channel": control["channel"]})
+                else:
+                    targets.append({"well": control["well"], "volume": control["vol"], "channel": control["channel"]})
 
-    return targets
-
+        return targets
+    else:
+        raise TypeError(f"{type(controls)}, should be of type WellGroup or list of well")
 
 def flow_cytometry(protocol, params):
     params = dict(params)
@@ -73,6 +80,8 @@ def flow_cytometry(protocol, params):
         "height": False,
         "weight": False
     } for selected in params["color"]]
+
+    print(type(params["nc_samples"]))
 
     protocol.flow_analyze(
         dataref=datetime.date.today().strftime('%d%b%Y') + "_flow_" + str(len(params["samples"])) + "_samples",
