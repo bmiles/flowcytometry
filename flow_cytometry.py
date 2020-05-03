@@ -2,7 +2,6 @@ import datetime
 from autoprotocol_utilities.misc_helpers import make_list
 from autoprotocol.container import Well, WellGroup
 
-
 def make_samples(wells, volume):
     if isinstance(wells, (WellGroup, list)) and isinstance(wells[0], Well):
         return [{

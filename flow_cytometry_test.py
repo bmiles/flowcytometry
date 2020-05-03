@@ -37,6 +37,25 @@ def test_preview(preview, flow_cytometry):
     assert len(protocol.as_dict()["instructions"]) == 1
 
 
+def test_protocol_removes_lids(preview, flow_cytometry):
+    ref = Protocol().ref(name="src_plate", cont_type="96-flat", cover="universal", discard=True)
+    for well in ref.wells_from(0, 8):
+        well.set_volume("100:microliter")
+
+    preview["samples"]["well"] = list(ref.wells_from(1, 7))
+    preview["nc_samples"][0]["well"] = ref.well(0)
+    preview["pc_samples"][0]["well"] = ref.well(0)
+
+    protocol = Protocol()
+    flow_cytometry.flow_cytometry(protocol, params=preview)
+
+    operations = []
+    for instruction in protocol.instructions:
+        operations.append(instruction.op)
+    print(operations)
+    assert 'uncover' in operations
+
+
 def test_make_samples_returns_the_correct_length(flow_cytometry):
     p = Protocol()
     plate = p.ref("sample_plate_1",
