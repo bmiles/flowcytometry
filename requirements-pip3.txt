@@ -1,2 +1,2 @@
-autoprotocol>=3.9.0
-autoprotocol_utilities>=2.1.7
+autoprotocol>=5.6.0
+autoprotocol_utilities>=2.3.1
