@@ -1,5 +1,4 @@
 import datetime
-# from autoprotocol.util import make_dottable_dict
 from autoprotocol_utilities.misc_helpers import make_list
 
 
